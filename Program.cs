@@ -356,7 +356,7 @@ public class Program
                         Console.WriteLine(WelcomeMine);
 
                         //intents
-                        for (int attempts = 0; attempts <= 5; attempts++)
+                        for (int attempts = 0; attempts <= 4; attempts++)
                         {
                             for (int i = 0;i < guideArray.Length; i++)
                             {
@@ -456,7 +456,71 @@ public class Program
                         }
                         break;
                     case 5:
-                        
+                        const string WelcomeShop = "Welcome to the shop! Type a number between 1 and 5 to buy an item";
+                        const string ManyCoins = "You have {0} bits\n";
+                        const string TypeMSG = "Type a number between 1 and 5";
+                        const string PriceMSG = "  - Price: {0} bits";
+                        const string ChoiceRangeError = "Must be a number between 1 and 5 ";
+                        const string BuyMSG = "You spent {0} bits on buying a {1}";
+
+                        int itemCounter = 1;
+                        string[] shopItems = { "Iron Dagger 🗡️", "Healing Potion ⚗️", "Ancient Key 🗝️", "Crossbow 🏹", "Metal Shield 🛡️" };
+                        int[] priceItems = { 30, 10, 50, 40, 20 };
+
+                        int choice = 0;
+                        int realChoice = 0;
+                        bool validatedChoice;
+
+                        Console.WriteLine(WelcomeShop);
+                        Console.WriteLine(ManyCoins, realBits);
+                        //mostra els productes i preus
+                        for (int i = 0; i < shopItems.Length; i++)
+                        {
+                            Console.Write(itemCounter + " " + shopItems[i]);
+                            Console.WriteLine(PriceMSG, priceItems[i]);
+                            itemCounter++;
+                        }
+                        //elecció de producta y validació
+                        validatedChoice = false;
+                        while (!validatedChoice)
+                        {
+                            try
+                            {
+                                Console.Write(TypeMSG + "\n");
+                                choice = Convert.ToInt32(Console.ReadLine());
+
+                                if (choice < 1 || choice > 5)
+                                {
+                                    Console.WriteLine(ChoiceRangeError);
+                                }
+                                else
+                                {
+                                    validatedChoice = true;
+                                }
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Error: you must enter a number");
+                            }
+                            realChoice = choice - 1;
+                        }
+                        //transacció del producte
+                        if (realBits >= priceItems[realChoice])
+                        {
+                            Console.WriteLine(BuyMSG, priceItems[realChoice], shopItems[realChoice]);
+                            string[] newInventory = new string[inventory.Length + 1];
+                            for (int i = 0; i < inventory.Length; i++)
+                            {
+                                newInventory[i] = inventory[i];
+                            }
+                            newInventory[newInventory.Length - 1] = shopItems[realChoice];
+                            realBits = realBits - priceItems[realChoice];
+                            inventory = newInventory;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Not enough bits");
+                        }
                         break;
                     case 6:
 
