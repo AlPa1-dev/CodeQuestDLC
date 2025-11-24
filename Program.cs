@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.Design;
 using System.Drawing;
+using System.Reflection.Emit;
 using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -19,9 +20,9 @@ public class Program
         const string MenuOption6 = "6. Show attacks by lvl";
         const string MenuOption7 = "7. Decode Ancient Scroll";
         const string MenuOptionExit = "0. Exit game";
-        const string MenuPrompt = "Choose an option (1-3) - (0) to exit: ";
+        const string MenuPrompt = "Choose an option (1-7) - (0) to exit: ";
         const string MSG_ThxPlay = "Exiting, thanks for playing";
-        const string InputErrorMessage = "Invalid input. Please enter a number between 0 and 3.";
+        const string InputErrorMessage = "Invalid input. Please enter a number between 0 and 7.";
         string nameMenu = "Welcome {0} with the title {1} and lvl {2}";
 
         int op = 0;
@@ -521,13 +522,83 @@ public class Program
                         {
                             Console.WriteLine("Not enough bits");
                         }
-                        break;
+                    break;
+                    //capitol 6
                     case 6:
+                        const string AvailableMSG ="The available attacks for level {0} are:";
+                        const string KeepMSG = "Keep training to unlock new attacks";
 
-                        break;
+                        string[][] attacksLvl =
+                        {
+                            new string[] {"Magic Spark 💫"},
+                            new string[] {"Fireball 🔥", "Ice Ray 🥏", "Arcane Shield ⚕️"},
+                            new string[] {"Meteor ☄️", "Pure Energy Explosion 💥", "Minor Charm 🎭", "Air Strike 🍃" },
+                            new string[] {"Wave of Light ⚜️", "Storm of Wings 🐦"},
+                            new string[] {"Cataclysm 🌋", "Portal of Chaos 🌀", "Arcane Blood Pact 🩸", "Elemental Storm ⛈️"}
+                        };
+
+                        Console.WriteLine(AvailableMSG,lvl);
+                        //impresións dels atacs segons nivell, un nivell té disponibles els seus atacs y els dels nivells anteriors
+                        if (lvl == 1)
+                        {
+                            //bucle que recorre cada array de la jagged
+                            for (int i = 0; i < 1; i++)
+                            {
+                                //bucle de la impresió dels atacs
+                                for (int j = 0; j < attacksLvl[i].Length; j++)
+                                {
+                                    Console.WriteLine(attacksLvl[i][j]);
+                                }
+                            }
+                            Console.WriteLine(KeepMSG);
+                        }
+                        else if (lvl == 2)
+                        {
+                            for (int i = 0; i < 2; i++)
+                            {
+                                for (int j = 0; j < attacksLvl[i].Length; j++)
+                                {
+                                    Console.WriteLine(attacksLvl[i][j]);
+                                }
+                            }
+                            Console.WriteLine(KeepMSG);
+                        }
+                        else if (lvl == 3)
+                        {
+                            for (int i = 0; i < 3; i++)
+                            {
+                                for (int j = 0; j < attacksLvl[i].Length; j++)
+                                {
+                                    Console.WriteLine(attacksLvl[i][j]);
+                                }
+                            }
+                            Console.WriteLine(KeepMSG);
+                        }
+                        else if (lvl == 4)
+                        {
+                            for (int i = 0; i < 4; i++)
+                            {
+                                for (int j = 0; j < attacksLvl[i].Length; j++)
+                                {
+                                    Console.WriteLine(attacksLvl[i][j]);
+                                }
+                            }
+                            Console.WriteLine(KeepMSG);
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 5; i++)
+                            {
+                                for (int j = 0; j < attacksLvl[i].Length; j++)
+                                {
+                                    Console.WriteLine(attacksLvl[i][j]);
+                                }
+                            }
+                        }
+                    break;
                     case 7:
-
-                        break;
+                      
+                    break;
                     case 0:
                         Console.WriteLine(MSG_ThxPlay);
                         break;
